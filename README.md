@@ -9,8 +9,8 @@ Simple docker image for pulling files from S3 to local file path
 - aws_access_key_id
 - aws_secret_access_key
 - bucket_name
-- s3_file_path
-- local_dir
-- local_file_name
+- remote_model_path,
+- local_model_dir
+- local_model_name
 
 
