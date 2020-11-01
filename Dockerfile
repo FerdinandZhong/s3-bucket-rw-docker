@@ -9,4 +9,4 @@ COPY . /app
 
 ENTRYPOINT ["python"]
 
-CMD [ "-V" ]
+CMD [ "read_file.py" ]
