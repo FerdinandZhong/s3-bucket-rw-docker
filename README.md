@@ -6,11 +6,11 @@ Simple docker image for pulling files from S3 to local file path
 ## Read file from S3
 
 ### Required environment variables
-- aws_access_key_id
-- aws_secret_access_key
-- bucket_name
-- remote_model_path,
-- local_model_dir
-- local_model_name
+- AWS_ACCESS_KEY_ID
+- AWS_SECRET_ACCESS_KEY
+- BUCKET_NAME
+- REMOTE_MODEL_PATH,
+- LOCAL_MODEL_DIR
+- LOCAL_MODEL_NAME
 
 
