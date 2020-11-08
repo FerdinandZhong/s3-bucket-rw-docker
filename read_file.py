@@ -10,16 +10,22 @@ local_model_name = os.environ['LOCAL_MODEL_NAME']
 
 local_model_path = '%s/%s' % (local_model_dir, local_model_name)
 
-s3 = boto3.resource(
+s3_resource = boto3.resource(
     service_name='s3',
     aws_access_key_id=aws_access_key_id,
     aws_secret_access_key=aws_secret_access_key
 )
 
-os.makedirs(local_model_dir, exist_ok=True)
+model_path = '%s/%s' % (local_model_dir, local_model_name)
+os.makedirs(model_path, exist_ok=True)
 
+def downloadDirectoryFroms3(s3_resource, bucket_name, remote_model_path):
+    bucket = s3_resource.Bucket(bucket_name)
+    for obj in bucket.objects.filter(Prefix = remote_model_path):
+        if not obj.key.endswith('/'):
+            print('downloading %s to %s/%s' % (obj.key, model_path, os.path.basename(obj.key)))
+            bucket.Object(obj.key) \
+                .download_file('%s/%s' % (model_path, os.path.basename(obj.key)))
 
-s3.Bucket(bucket_name) \
-    .Object(remote_model_path) \
-    .download_file(local_model_path)
+downloadDirectoryFroms3(s3_resource, bucket_name, remote_model_path)
 
